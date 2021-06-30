@@ -1,8 +1,13 @@
 FROM python:3.9.6-alpine3.14
 LABEL version="0.1"
+LABEL maintainer="work@pawelwysokinski.pl"
+
+RUN adduser -D app_user -h /app
+USER app_user
 
 ADD setup.py LICENSE README.md /app/
 ADD movie_query /app/movie_query/
-RUN cd /app && python3 setup.py install && rm -rf build dist movie_query.egg.info
+RUN cd /app && pip install .
 
-ENTRYPOINT ["/usr/local/bin/movie_query"]
+WORKDIR ["/app"]
+ENTRYPOINT ["/app/.local/bin/movie_query"]

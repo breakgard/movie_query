@@ -1,9 +1,13 @@
 import requests
 import logging
-from . import api_config
+from . import config
 
-def check_api_key(api_url, api_key, timeout=api_config.TIMEOUT):
+def check_api_key(api_url, api_key, timeout=config.TIMEOUT):
+  """Verifies if the api_key is valid."""
+
   logging.debug("Entering check_api_key")
+  if api_key == "" or api_key is None:
+    raise Exception("Api key not provided.")
   params = {
     "apikey": api_key
   }
@@ -11,15 +15,16 @@ def check_api_key(api_url, api_key, timeout=api_config.TIMEOUT):
   logging.debug(f"Result: {result.text}")
   if result.status_code != 200:
     if result.status_code == 401:
-      raise Exception("Api key is invalid or not provided.")
+      raise Exception("Api key is invalid.")
     else:
       raise Exception(f"Error when connecting to API: {result.text}")
   logging.debug("Leaving check_api_key")
 
 def query_by_title(api_url, api_key, movie_title, y=None,
-                    type=api_config.TYPE, plot=api_config.PLOT,
-                    r=api_config.RESULT_TYPE, v=api_config.VERSION,
-                    timeout=api_config.TIMEOUT):
+                    type=config.TYPE, plot=config.PLOT,
+                    r=config.RESULT_TYPE, v=config.VERSION,
+                    timeout=config.TIMEOUT):
+  """Queries api_url using api_key for movie_title with additional api parameters."""
   logging.debug("Entering query_by_title")
   params = {
     "apikey": api_key,
