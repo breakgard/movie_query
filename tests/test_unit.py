@@ -41,13 +41,13 @@ def test_query_by_title_NOK(requests_mock):
 
 def test_get_movie_rating_OK(requests_mock):
   requests_mock.get(movie_query.config.API_URL, status_code=200, text=mock_response_OK)
-  assert "82%" == movie_query.main.get_movie_rating(movie_query.config.API_URL, mock_API_KEY, mock_TITLE)
+  assert "82%" == movie_query.main.get_movie_rating(movie_query.config.API_URL, mock_API_KEY, mock_TITLE, movie_query.config.RATING_SOURCE)
 
 def test_get_movie_rating_OK_NO_RATING(requests_mock):
   requests_mock.get(movie_query.config.API_URL, status_code=200, text=mock_response_NO_RATING)
-  assert "N/A" == movie_query.main.get_movie_rating(movie_query.config.API_URL, mock_API_KEY, mock_TITLE)
+  assert "N/A" == movie_query.main.get_movie_rating(movie_query.config.API_URL, mock_API_KEY, mock_TITLE, movie_query.config.RATING_SOURCE)
 
 def test_get_movie_rating_NOK(requests_mock):
   requests_mock.get(movie_query.config.API_URL, status_code=200, text=mock_response_MOVIE_NOT_FOUND)
   with pytest.raises(movie_query.exceptions.MovieNotFoundException):
-    movie_query.main.get_movie_rating(movie_query.config.API_URL, mock_API_KEY, mock_TITLE)
+    movie_query.main.get_movie_rating(movie_query.config.API_URL, mock_API_KEY, mock_TITLE, movie_query.config.RATING_SOURCE)

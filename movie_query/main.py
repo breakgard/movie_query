@@ -32,7 +32,7 @@ def validate_url(ctx, param, value):
 @click.argument("movie_title", type=str)
 def main(debug, api_url, api_key, rating_source, movie_title):
   """
-    This tool returns a --rating_source for MOVIE_NAME from --api_url.
+    This tool returns a --rating_source for MOVIE_TITLE from --api_url.
   """
   try:
     setup_logging(debug)
@@ -41,7 +41,7 @@ def main(debug, api_url, api_key, rating_source, movie_title):
     print(get_movie_rating(api_url, api_key, movie_title, rating_source))
     sys.exit(0)
   except exceptions.MovieNotFoundException:
-    logging.error(f"Movie {movie_name} not found!")
+    logging.error(f"Movie {movie_title} not found!")
     sys.exit(1)
   except Exception:
     logging.exception("Something went wrong during execution.")
