@@ -1,0 +1,5 @@
+TYPE="movie"
+PLOT="full"
+RESULT_TYPE="json"
+VERSION=1
+TIMEOUT=5
