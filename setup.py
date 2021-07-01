@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="movie_query",
-    version="0.1",
+    version="1.0.0",
     packages=["movie_query"],
     author="Pawel Wysokinski",
     author_email="work@pawelwysokinski.pl",

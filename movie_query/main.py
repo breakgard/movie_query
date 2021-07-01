@@ -58,7 +58,7 @@ def validate_url(ctx, param, value): # pylint: disable=unused-argument
 @click.argument("movie_title", type=str)
 def main(debug, api_url, api_key, rating_source, movie_title):
     """
-    This tool returns a rating_source for MOVIE_TITLE from Open Movie database api_url.
+    This tool returns a rating from RATING_SOURCE for MOVIE_TITLE from Open Movie database API_URL.
     """
     try:
         setup_logging(debug)
